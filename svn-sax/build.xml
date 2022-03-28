@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+
+<project name="sax" default="ear" basedir=".">
+
+	<!-- Directory for sources -->
+	<property name="src.dir" value="src"/>
+	<!-- Directory for class files -->
+	<property name="classes.dir" value="classes"/>
+	<!-- Directory for hibernate files -->
+	<property name="hibernate.dir" value="hibernate"/>
+	<!-- Directory for hibernate archives -->
+	<property name="har.dir" value="har"/>
+	<!-- Directory for enterprise archives -->
+	<property name="ear.dir" value="ear"/>
+	<!-- Directory for jar archives -->
+	<property name="jar.dir" value="jar"/>
+	<!-- Directory for libraries -->
+	<property name="lib.dir" value="lib"/>
+	<!-- Directory containing various config files -->
+	<property name="conf.dir" value="conf" />
+	<!-- Directory for local deployments -->
+	<property name="deploy.dir.local" value="e:\sax\jboss-5.0.1.GA\server\default\deploy" />
+
+	<!-- Add all JAR and ZIP files in lib directory to classpath -->
+	<path id="class.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
+	</path>
+
+	<!-- Tasks -->
+	<taskdef name="testng" classname="com.beust.testng.TestNGAntTask">
+		<classpath refid="class.path"/>
+	</taskdef>
+
+	<!-- Documentation -->
+	<target name="javadoc">
+
+			<javadoc  packagenames="com.xdx.*"
+								sourcepath="${SRC_ORG}"
+								destdir="${JavaDoc_ORG}"
+								author="true"
+								version="true"
+								use="true"
+								access="private"
+								linksource="true"
+								windowtitle="SAX API"
+								doctitle="The XDx analyzer"
+								bottom="Copyright (c): 2009"
+								helpfile="${basedir}/readme.html" />
+	</target>
+
+	<target name="init">
+		<splash imageurl="file:///${basedir}/resources/media/XDxLogo.gif" />
+
+		<tstamp>
+	 			<format property="TODAY" pattern="yyyy-mm-dd"/>
+		</tstamp>
+
+		<echo message="" />
+		<echo message="" />
+		<echo message="" />
+		<echo message="Building on ${TODAY}" />
+		<echo message="" />
+		<echo message="" />
+		<echo message="" />
+
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${har.dir}"/>
+		<mkdir dir="${ear.dir}"/>
+		<mkdir dir="${jar.dir}"/>
+	</target>
+
+	<target name="clean" >
+
+		<delete quiet="true" dir="${classes.dir}"/>
+		<delete quiet="true" dir="${har.dir}"/>
+		<delete quiet="true" dir="${ear.dir}"/>
+		<delete quiet="true" dir="${jar.dir}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src.dir}"
+			destdir="${classes.dir}"
+			compiler="modern"
+			source="1.5"
+			deprecation="true"
+			fork="true"
+			verbose="false"
+			classpathref="class.path"
+			debug="on"/>
+	</target>
+
+	<!-- Makes the enterprise archive file, which can be deployed on JBoss servers. -->
+	<target name="ear" depends="jar, har" description="Makes the SAX enterprise archive file.">
+
+		<ear destfile="${ear.dir}/${ant.project.name}.ear" appxml="${conf.dir}/application.xml">
+			<metainf dir="${conf.dir}">
+				<include name="jboss-app.xml"/>
+			</metainf>
+			<fileset dir="${jar.dir}"/>
+			<fileset dir="${har.dir}"/>
+			<fileset dir="${lib.dir}" excludes="buildonly/*" />
+		</ear>
+
+	</target>
+
+	<!-- Create the hibernate HAR file -->
+	<target name="har" depends="compile">
+		<jar jarfile="${har.dir}/sax.har">
+			<metainf dir="${conf.dir}">
+				<include name="sax-hibernate.xml"/>
+			</metainf>
+			<fileset dir="${hibernate.dir}" includes="**/*.hbm.xml"/>
+		</jar>
+	</target>
+
+	<!-- Generate main jar file -->
+	<target name="jar" depends="compile" description="Makes JAR file suitable for deployment in JBoss 5.0">
+
+		<jar destfile="${jar.dir}/${ant.project.name}.jar">
+			<fileset dir="${conf.dir}" includes="sdsdb.properties"/>
+			<fileset dir="${classes.dir}">
+				<exclude name="**/test/*"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<!-- Deploys application to the local JBoss server. -->
+	<target name="deploy-local" depends="ear" description="Deploys application to the local JBoss server.">
+		<copy tofile="${deploy.dir.local}/${ant.project.name}-ds.xml" file="${conf.dir}/${ant.project.name}-dev-ds.xml"/>
+		<copy todir="${deploy.dir.local}" file="${ear.dir}/${ant.project.name}.ear"/>
+	</target>
+
+</project>

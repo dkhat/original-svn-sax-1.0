@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="buildonly">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/hibernate3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/ojdbc14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/scheduler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/xjavadoc-1.5-snapshot050611.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/jboss-javaee.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/testng-4.6.1-jdk15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/buildonly/jbossws-native-jaxws.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/commons-beanutils-1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/javas-1.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/abi-local.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/SDS2_JDK15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/lib/IO_JDK15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

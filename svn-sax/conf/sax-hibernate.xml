@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<hibernate-configuration xmlns="urn:jboss:hibernate-deployer:1.0">
+
+   <session-factory name="java:/hibernate/SaxSessionFactory" bean="jboss.har:service=SaxHibernateMBean">
+      <property name="datasourceName">java:/jdbc/SaxDS</property>
+      <property name="dialect">org.hibernate.dialect.OracleDialect</property>
+      <property name="showSqlEnabled">false</property>
+      <property name="jdbcBatchSize">30</property>
+      <property name="jdbcFetchSize">80</property>
+      <property name="reflectionOptimizationEnabled">true</property>
+      <property name="querySubstitutions">true 'Y', false 'N'</property>
+      <!-- property name="cacheProviderClass">org.hibernate.cache.TreeCacheProvider</property -->
+
+      <depends>jboss:service=Naming</depends>
+      <depends>jboss:service=TransactionManager</depends>
+   </session-factory>
+
+</hibernate-configuration>

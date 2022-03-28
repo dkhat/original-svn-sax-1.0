@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: oracle-ds.xml 63175 2007-05-21 16:26:06Z rrajesh $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for Oracle originally from Steven Coy             -->
+<!-- ==================================================================== -->
+
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>jdbc/SaxDS</jndi-name>
+    <connection-url>jdbc:oracle:thin:@ustorit:1522:SAX</connection-url>
+    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+    <user-name>sax</user-name>
+    <password>sax</password>
+    <min-pool-size>1</min-pool-size>
+    <max-pool-size>10</max-pool-size>
+    <set-tx-query-timeout></set-tx-query-timeout>
+    <query-timeout>300</query-timeout> <!-- maximum of 5 minutes for queries -->
+    <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+    <check-valid-connection-sql>SELECT * FROM DUAL</check-valid-connection-sql>
+    <metadata>
+         <type-mapping>Oracle10g</type-mapping>
+    </metadata>
+  </local-tx-datasource>
+</datasources>

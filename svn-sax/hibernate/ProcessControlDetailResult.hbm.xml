@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.ProcessControlDetailResultBO" table="PROCESSCONTROLDETAILRESULT">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PROCESSCONTROLDETAILRES_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="processControlDetail" class="com.xdx.sax.bo.ProcessControlDetailBO" fetch="select">
+            <column name="PROCESSCONTROLDETAILID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="plateSet" class="com.xdx.sax.bo.PlateSetBO" fetch="select">
+            <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="plateSection" class="com.xdx.sax.bo.PlateSectionBO" fetch="select">
+            <column name="PLATESECTIONID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="pass" type="java.lang.Boolean">
+            <column name="pass" />
+        </property>
+        <property name="failureReason" type="string">
+            <column name="FAILUREREASON" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

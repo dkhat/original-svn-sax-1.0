@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<mbean code="org.jboss.varia.scheduler.Scheduler"
+	       name="sax:service=SdsFileScannerSchedule">
+		<attribute name="StartAtStartup">true</attribute>
+		<attribute name="SchedulableClass">com.xdx.sax.schedulable.SdsFileScannerImpl</attribute>
+		<attribute name="InitialStartDate">NOW</attribute>
+		<attribute name="SchedulePeriod">60000</attribute>
+		<attribute name="InitialRepetitions">-1</attribute>
+		<depends>
+			<mbean code="javax.management.timer.Timer"
+			       name="jboss:service=Timer"/>
+		</depends>
+	</mbean>
+
+	<mbean code="org.jboss.varia.scheduler.Scheduler"
+	       name="sax:service=PlateSetProcessorSchedule">
+		<attribute name="StartAtStartup">true</attribute>
+		<attribute name="SchedulableClass">com.xdx.sax.schedulable.PlateSetProcessorImpl</attribute>
+		<attribute name="InitialStartDate">NOW</attribute>
+		<attribute name="SchedulePeriod">60000</attribute>
+		<attribute name="InitialRepetitions">-1</attribute>
+		<depends>
+			<mbean code="javax.management.timer.Timer"
+			       name="jboss:service=Timer"/>
+		</depends>
+	</mbean>
+
+</server>

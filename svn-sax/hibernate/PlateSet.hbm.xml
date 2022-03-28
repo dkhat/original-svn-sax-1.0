@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.PlateSetBO" table="PLATESET">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PLATESET_ID_SEQ</param>
+            </generator>
+        </id>
+        <property name="externalId" type="string">
+            <column name="EXTERNALID" length="50" not-null="true" />
+        </property>
+        <many-to-one name="platedesign" class="com.xdx.sax.bo.PlateDesignBO" fetch="select">
+            <column name="PLATEDESIGNID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="testcode" class="com.xdx.sax.bo.TestcodeBO" fetch="select">
+            <column name="TESTCODEID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="processedTimestamp" type="java.util.Date">
+            <column name="PROCESSEDTIMESTAMP" />
+        </property>
+        <property name="registeredTimestamp" type="java.util.Date">
+            <column name="REGISTEREDTIMESTAMP" />
+        </property>
+        <set name="platesectiondetails" inverse="true">
+            <key>
+                <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.PlateSectionDetailBO" />
+        </set>
+        <set name="aggsectionresults" inverse="true">
+            <key>
+                <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.AggSectionResultBO" />
+        </set>
+        <set name="qcresultfinals" inverse="true">
+            <key>
+                <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.QcResultFinalBO" />
+        </set>
+        <set name="plates" inverse="true">
+            <key>
+                <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.PlateBO" />
+        </set>
+        <set name="aggmarkerresults" inverse="true">
+            <key>
+                <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.AggMarkerResultBO" />
+        </set>
+        <set name="qccriteriastepresults" inverse="true">
+            <key>
+                <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.QcCriteriaStepResultBO" />
+        </set>
+    </class>
+</hibernate-mapping>

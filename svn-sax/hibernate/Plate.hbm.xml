@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.PlateBO" table="PLATE">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PLATE_ID_SEQ</param>
+            </generator>
+        </id>
+        <natural-id>
+        	<property name="platebarcode" type="string">
+            	<column name="PLATEBARCODE" length="50" not-null="true" unique="true" />
+        	</property>
+        </natural-id>
+        <many-to-one name="plateset" class="com.xdx.sax.bo.PlateSetBO" fetch="select">
+            <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="numberinset" type="long">
+            <column name="NUMBERINSET" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="processedTimestamp" type="java.util.Date">
+            <column name="PROCESSEDTIMESTAMP" not-null="false" />
+        </property>
+        <property name="registeredTimestamp" type="java.util.Date">
+            <column name="REGISTEREDTIMESTAMP" not-null="false" />
+        </property>
+        <set name="rawwelldatas" inverse="true">
+            <key>
+                <column name="PLATEID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.RawWellDataBO" />
+        </set>
+        <property name="processorError" type="java.lang.Long">
+            <column name="PROCESSORERROR" precision="38" scale="0" not-null="false" default="0" />
+        </property>
+       	<property name="qcResult" type="string">
+           	<column name="QCRESULT" length="50" not-null="false" />
+       	</property>
+       	<property name="qcFailReason" type="string">
+           	<column name="QCFAILREASON" length="250" not-null="false" />
+       	</property>
+       	<property name="qcComment" type="string">
+           	<column name="QCCOMMENT" length="1024" not-null="false" />
+       	</property>
+       	<property name="qcDoneBy" type="string">
+           	<column name="QCDONEBY" length="50" not-null="false" />
+       	</property>
+       	<property name="qcDate" type="java.util.Date">
+           	<column name="QCDATE" not-null="false" />
+       	</property>
+        <property name="instrumentSerialNumber" type="string">
+            <column name="INSTRUMENTSERIALNUMBER" length="20" not-null="false" />
+        </property>
+        <property name="instrumentRunTime" type="java.util.Date">
+            <column name="INSTRUMENTRUNTIME" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>

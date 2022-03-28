@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 13, 2009 8:27:51 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.ProcessControlRawScoreBO" table="PROCESSCONTROLRAWSCORE">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PROCESSCONTROLRAWSCORE_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="processControl" class="com.xdx.sax.bo.ProcessControlBO" fetch="select">
+            <column name="PROCESSCONTROLID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="expectedRawScore" type="double">
+            <column name="EXPECTEDRAWSCORE" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="bound" type="double">
+            <column name="BOUND" precision="126" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

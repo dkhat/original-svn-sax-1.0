@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org_lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/svn-sax/org_lib/SDS2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/svn-sax/org_lib/IO.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

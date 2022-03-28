@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.AggSectionResultBO" table="AGGSECTIONRESULT">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">AGGSECTIONRESULT_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="plateset" class="com.xdx.sax.bo.PlateSetBO" fetch="select">
+            <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="platesection" class="com.xdx.sax.bo.PlateSectionBO" fetch="select">
+            <column name="PLATESECTIONID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="algoscore" type="java.lang.Double">
+            <column name="ALGOSCORE" precision="126" scale="0" />
+        </property>
+        <property name="mappedscore" type="java.lang.Double">
+            <column name="MAPPEDSCORE" precision="126" scale="0" />
+        </property>
+        <property name="mappedlowscore" type="java.lang.Double">
+            <column name="MAPPEDLOWSCORE" precision="126" scale="0" />
+        </property>
+        <property name="mappedhighscore" type="java.lang.Double">
+            <column name="MAPPEDHIGHSCORE" precision="126" scale="0" />
+        </property>
+        <property name="qcstatus" type="string">
+            <column name="QCSTATUS" length="50" />
+        </property>
+        <property name="qcfailreason" type="string">
+            <column name="QCFAILREASON" length="50" />
+        </property>
+        <property name="qcdoneby" type="string">
+            <column name="QCDONEBY" length="50" />
+        </property>
+        <property name="qcdate" type="date">
+            <column name="QCDATE" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

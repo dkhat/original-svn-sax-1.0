@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.TestcodeBO" table="TESTCODE">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">TESTCODE_ID_SEQ</param>
+            </generator>
+        </id>
+        <property name="testcodename" type="string">
+            <column name="TESTCODENAME" length="10" not-null="true" unique="true" />
+        </property>
+        <property name="testdescription" type="string">
+            <column name="TESTDESCRIPTION" length="100" not-null="true" />
+        </property>
+        <many-to-one name="qcSchema" class="com.xdx.sax.bo.QcSchemaBO" fetch="select">
+            <column name="QCSCHEMAID" precision="38" scale="0" not-null="false" />
+        </many-to-one>
+        <many-to-one name="process" class="com.xdx.sax.bo.ProcessBO" fetch="select">
+            <column name="PROCESSID" precision="38" not-null="true" />
+        </many-to-one>
+        <set name="configs" inverse="true">
+            <key>
+                <column name="TESTCODE" precision="38" scale="0" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.ConfigBO" />
+        </set>
+        <set name="platedesigns" inverse="false" table="PLATEDESIGNTOTESTCODE">
+            <key>
+                <column name="TESTCODEID" precision="38" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.xdx.sax.bo.PlateDesignBO">
+                <column name="PLATEDESIGNID" precision="38" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="platesets" inverse="true">
+            <key>
+                <column name="TESTCODEID" precision="38" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.PlateSetBO" />
+        </set>
+    </class>
+</hibernate-mapping>

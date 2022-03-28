@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.RawWellDataBO" table="RAWWELLDATA">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">RAWWELLDATA_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="plate" class="com.xdx.sax.bo.PlateBO" fetch="select">
+            <column name="PLATEID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="aggregate" class="com.xdx.sax.bo.AggregateBO" fetch="select">
+            <column name="AGGREGATEID" precision="38" scale="0" />
+        </many-to-one>
+        <many-to-one name="wellType" class="com.xdx.sax.bo.WellTypeBO" fetch="select">
+            <column name="WELLTYPEID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+	    <array name="rn" cascade="all" fetch="join"  >
+	        <key column="RAWWELLDATAID"/>
+	  	    <list-index column="IDX"/>
+	    	<one-to-many class="com.xdx.sax.bo.WellRnBO"/>
+	    </array>
+        <property name="rownumber" type="long">
+            <column name="ROWNUMBER" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="columnnumber" type="long">
+            <column name="COLUMNNUMBER" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="loglinearleftend" type="java.lang.Integer">
+            <column name="LOGLINEARLEFTEND" precision="38" scale="0" />
+        </property>
+        <property name="loglinearrightend" type="java.lang.Integer">
+            <column name="LOGLINEARRIGHTEND" precision="38" scale="0" />
+        </property>
+        <property name="errornum" type="int" not-null="true" >
+            <column name="ERRORNUM" precision="38" scale="0" default="0" />
+        </property>
+        <property name="deltact" type="java.lang.Double">
+            <column name="DELTACT" precision="126" scale="0" />
+        </property>
+        <property name="bkgfam" type="java.lang.Double">
+            <column name="BKGFAM" precision="126" scale="0" />
+        </property>
+        <property name="baselinefam" type="java.lang.Double">
+            <column name="BASELINEFAM" precision="126" scale="0" />
+        </property>
+        <property name="saturationfam" type="java.lang.Double">
+            <column name="SATURATIONFAM" precision="126" scale="0" />
+        </property>
+        <property name="widthmetric" type="java.lang.Double">
+            <column name="WIDTHMETRIC" precision="126" scale="0" />
+        </property>
+        <property name="ambiguitymetric" type="java.lang.Double">
+            <column name="AMBIGUITYMETRIC" precision="126" scale="0" />
+        </property>
+        <property name="xdxct" type="java.lang.Double">
+            <column name="XDXCT" precision="126" scale="0" />
+        </property>
+        <property name="cterror" type="java.lang.Double">
+            <column name="CTERROR" precision="126" scale="0" />
+        </property>
+        <property name="normalizedXdxCt" type="java.lang.Double">
+            <column name="NORMALIZEDXDXCT" precision="126" scale="0" />
+        </property>
+        <property name="isEmpty" type="boolean" not-null="true">
+            <column name="ISEMPTY" default="false" />
+        </property>
+        <set name="markers" inverse="false" table="RAWWELLDATATOMARKER">
+            <key>
+                <column name="RAWWELLDATAID" precision="38" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.xdx.sax.bo.MarkerBO">
+                <column name="MARKERID" precision="38" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

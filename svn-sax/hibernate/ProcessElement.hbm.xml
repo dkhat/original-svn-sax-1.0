@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.ProcessElementBO" table="PROCESSELEMENT">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PROCESSELEMENT_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="processelementcategory" class="com.xdx.sax.bo.ProcessElementCategoryBO" fetch="select">
+            <column name="CATEGORYID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="classname" type="string">
+            <column name="CLASS" length="50" not-null="true" unique="true" />
+        </property>
+        <set name="processsteps" inverse="true">
+            <key>
+                <column name="PROCESSELEMENTID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.ProcessStepBO" />
+        </set>
+    </class>
+</hibernate-mapping>

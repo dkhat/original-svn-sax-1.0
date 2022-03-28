@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.AggMarkerResultBO" table="AGGMARKERRESULT">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">AGGMARKERRESULT_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="plateset" class="com.xdx.sax.bo.PlateSetBO" fetch="select">
+            <column name="PLATESETID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="platesection" class="com.xdx.sax.bo.PlateSectionBO" fetch="select">
+            <column name="PLATESECTIONID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="aggregate" class="com.xdx.sax.bo.AggregateBO" fetch="select">
+            <column name="AGGREGATEID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="wsmxdxct" type="java.lang.Double">
+            <column name="WSMXDXCT" precision="126" scale="0" />
+        </property>
+        <property name="wsmnormct" type="java.lang.Double">
+            <column name="WSMNORMCT" precision="126" scale="0" />
+        </property>
+        <property name="medianxdxct" type="java.lang.Double">
+            <column name="MEDIANXDXCT" precision="126" scale="0" />
+        </property>
+        <property name="platestddev" type="java.lang.Double">
+            <column name="PLATESTDDEV" precision="126" scale="0" />
+        </property>
+        <property name="wsmBaselineFam" type="java.lang.Double">
+            <column name="WSMBASELINEFAM" precision="126" scale="0" />
+        </property>
+        <property name="wsmSaturationFam" type="java.lang.Double">
+            <column name="WSMSATURATIONFAM" precision="126" scale="0" />
+        </property>
+        <property name="errortype" type="string">
+            <column name="ERRORTYPE" length="2" />
+        </property>
+        <set name="markers" inverse="false" table="AGGRESULTTOMARKER">
+            <key>
+                <column name="AGGRESULTID" precision="38" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.xdx.sax.bo.MarkerBO">
+                <column name="MARKERID" precision="38" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

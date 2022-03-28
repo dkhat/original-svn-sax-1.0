@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 13, 2009 8:27:51 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.ProcessControlBO" table="PROCESSCONTROL">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PROCESSCONTROL_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="testcode" class="com.xdx.sax.bo.TestcodeBO" fetch="select">
+            <column name="TESTCODEID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="externalid" type="string">
+            <column name="EXTERNALID" length="100" not-null="true" unique="true" />
+        </property>
+        <set name="processcontroldetails" inverse="true">
+            <key>
+                <column name="PROCESSCONTROLID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.ProcessControlDetailBO" />
+        </set>
+        <set name="plateprocesscontrols" inverse="true">
+            <key>
+                <column name="PROCESSCONTROLID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.PlateProcessControlBO" />
+        </set>
+    </class>
+</hibernate-mapping>

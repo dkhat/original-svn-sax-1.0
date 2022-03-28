@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.ProcessBO" table="PROCESS">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">PROCESS_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="testcode" class="com.xdx.sax.bo.TestcodeBO" fetch="select">
+            <column name="TESTCODEID" precision="38" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="isactive" type="boolean">
+            <column name="ISACTIVE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="createdbyuserid" type="long">
+            <column name="CREATEDBYUSERID" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="createddate" type="java.util.Date">
+            <column name="CREATEDDATE" length="7" not-null="true" />
+        </property>
+        <set name="processsteps" inverse="true">
+            <key>
+                <column name="PROCESSID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.ProcessStepBO" />
+        </set>
+    </class>
+</hibernate-mapping>

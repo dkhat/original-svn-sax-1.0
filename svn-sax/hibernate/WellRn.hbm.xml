@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.WellRnBO" table="WELLRN">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="sequence">
+                <param name="sequence">WELLRN_ID_SEQ</param>
+            </generator>
+        </id>
+        <property name="rn" type="java.lang.Double">
+            <column name="RN" />
+        </property>
+    </class>
+</hibernate-mapping>

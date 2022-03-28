@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.QcCriteriaStepBO" table="QCCRITERIASTEP">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">QCCRITERIASTEP_ID_SEQ</param>
+            </generator>
+        </id>
+        <many-to-one name="qccriteriasteptemplate" class="com.xdx.sax.bo.QcCriteriaStepTemplateBO" fetch="select">
+            <column name="TEMPLATEID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="qccriteria" class="com.xdx.sax.bo.QcCriteriaBO" fetch="select">
+            <column name="QCCRITERIAID" precision="38" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="ranking" type="long">
+            <column name="RANKING" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="passreturnresult" type="string">
+            <column name="PASSRETURNRESULT" length="10" />
+        </property>
+        <property name="failreturnresult" type="string">
+            <column name="FAILRETURNRESULT" length="10" />
+        </property>
+        <property name="assay1sub" type="string">
+            <column name="ASSAY1SUB" length="20" />
+        </property>
+        <property name="assay2sub" type="string">
+            <column name="ASSAY2SUB" length="20" />
+        </property>
+        <property name="yvalsub" type="string">
+            <column name="YVALSUB" length="20" />
+        </property>
+        <property name="zvalsub" type="string">
+            <column name="ZVALSUB" length="20" />
+        </property>
+        <property name="processorStatus" type="string">
+            <column name="PROCESSORSTATUS" length="50" />
+        </property>
+        <property name="normalizationClass" type="string">
+            <column name="NORMALIZATIONCLASS" length="50" />
+        </property>
+        <set name="qccriteriastepresults" inverse="true">
+            <key>
+                <column name="QCCRITERIASTEPID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.QcCriteriaStepResultBO" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 21, 2009 4:04:43 PM by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.xdx.sax.bo.QcSchemaBO" table="QCSCHEMA">
+        <id name="id" type="long">
+            <column name="ID" precision="38" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">QCSCHEMA_ID_SEQ</param>
+            </generator>
+        </id>
+        <property name="schemaname" type="string">
+            <column name="SCHEMANAME" length="20" />
+        </property>
+        <property name="createdate" type="date">
+            <column name="CREATEDATE" length="7" />
+        </property>
+        <property name="creator" type="string">
+            <column name="CREATOR" length="50" />
+        </property>
+        <property name="modifydate" type="date">
+            <column name="MODIFYDATE" length="7" />
+        </property>
+        <property name="modifier" type="string">
+            <column name="MODIFIER" length="50" />
+        </property>
+        <set name="qccriterias" inverse="true">
+            <key>
+                <column name="QCSCHEMAID" precision="38" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.QcCriteriaBO" />
+        </set>
+        <set name="testcodes" inverse="true">
+            <key>
+                <column name="QCSCHEMAID" precision="38" scale="0" not-null="false" />
+            </key>
+            <one-to-many class="com.xdx.sax.bo.TestcodeBO"/>
+        </set>
+    </class>
+</hibernate-mapping>
